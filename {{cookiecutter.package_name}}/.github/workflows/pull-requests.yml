@@ -1,0 +1,69 @@
+on: [push, pull_request]
+
+name: Pull Requests
+
+jobs:
+  build-and-test:
+    name: Build and test
+
+    strategy:
+      matrix:
+        go-version: [1.15.x, 1.16.x]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    runs-on: ${{ '{{' }} matrix.os {{ '}}' }}
+
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ '{{' }} matrix.go-version {{ '}}' }}
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install
+        run: go install
+
+      - name: Install task
+        run: go get -u github.com/go-task/task/v3/cmd/task
+
+      - name: Test
+        run: task test
+
+      - name: Build
+        run: task build
+
+  build-docker:
+    name: Build Docker
+
+    strategy:
+      matrix:
+        go-version: [1.15.x, 1.16.x]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ '{{' }} matrix.go-version {{ '}}' }}
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install
+        run: go install
+
+      - name: Install task
+        run: go get -u github.com/go-task/task/v3/cmd/task
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # - name: Build and push
+      #   id: docker_build
+      #   uses: docker/build-push-action@v2
+
+      - name: Build Docker
+        run: task docker-build

@@ -1,0 +1,26 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - air -c .air.toml
+
+  test:
+    cmds:
+      - go test ./...
+
+  test-cov:
+    cmds:
+      - go test -cover ./...
+
+  build:
+    cmds:
+      - go build
+
+  gen:
+    cmds:
+      - go generate
+
+  docker-build:
+    cmds:
+      - docker build . -t {{cookiecutter.org_name}}-{{cookiecutter.package_name}}

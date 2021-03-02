@@ -1,0 +1,7 @@
+# To replace vars here with env vars, just define them all in
+# upper case and var name here.
+#  E.g.: jwt_key -> Define an env var called CONF_JWT_KEY
+
+# Auth
+
+jwt_key: "all-you-need-is-love"
