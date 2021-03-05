@@ -16,6 +16,7 @@ import (
 	"github.com/{{cookiecutter.org_name}}/{{cookiecutter.package_name}}/infra/plog"
 	"github.com/{{cookiecutter.org_name}}/{{cookiecutter.package_name}}/infra/teardown"
 	"github.com/{{cookiecutter.org_name}}/{{cookiecutter.package_name}}/net/v1"
+	"github.com/{{cookiecutter.org_name}}/{{cookiecutter.package_name}}/config"
 )
 
 func Healthz(w http.ResponseWriter, r *http.Request) {
@@ -24,14 +25,14 @@ func Healthz(w http.ResponseWriter, r *http.Request) {
 }
 
 func SetupServer(container *dig.Container) {
-	err := container.Invoke(func(r *mux.Router, t *teardown.TearDown, logger plog.Log) {
+	err := container.Invoke(func(r *mux.Router, t *teardown.TearDown, logger plog.Log, config config.Config) {
 		r.HandleFunc("/healthz", Healthz).Name("healthz")
 
 		v1.Setup(r.PathPrefix("/v1").Subrouter(), container)
 
 		done := make(chan os.Signal, 1)
 
-		port := 8000
+		port := config.GetInt("server_port")
 
 		signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 

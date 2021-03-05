@@ -36,6 +36,10 @@ func init() {
 	config = nil
 }
 
+func setDefault(viper *viper.Viper) {
+	viper.SetDefault("server_port", 8000)
+}
+
 func createConfig() *viperConfig {
 	newViper := viper.New()
 
@@ -51,6 +55,8 @@ func createConfig() *viperConfig {
 	// Env
 	newViper.SetEnvPrefix("conf")
 	newViper.AutomaticEnv()
+
+	setDefault(newViper)
 
 	if err := newViper.ReadInConfig(); err != nil {
 		log.Fatalf("Error reading config file, %s", err)
