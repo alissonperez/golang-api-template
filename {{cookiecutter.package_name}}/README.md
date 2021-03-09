@@ -12,6 +12,8 @@ $ go install
 
 ## How to run
 
+Install [Task](https://taskfile.dev/#/installation), then run:
+
 ```
 $ task
 ```
