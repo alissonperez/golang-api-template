@@ -1,5 +1,6 @@
 package config
 
+// Good fo testing proposes
 type configMap struct {
 	confMap map[string]interface{}
 }
