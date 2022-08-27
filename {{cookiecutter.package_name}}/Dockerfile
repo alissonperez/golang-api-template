@@ -1,7 +1,7 @@
 # build stage
-FROM golang:1.15.8-alpine3.13 AS build-env
+FROM golang:1.19.0-alpine3.15 AS build-env
 
-RUN apk --no-cache add build-base # git bzr mercurial gcc
+# RUN apk --no-cache add build-base
 
 ADD . /src
 

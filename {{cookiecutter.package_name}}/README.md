@@ -1,8 +1,9 @@
 # {{cookiecutter.project_name}}
 
-# Dependencies
+## Dependencies
 
-- Go 1.15.*
+- **Go 1.19**: See how to setup and basic usage it [here](https://go.dev/doc/install).
+- **Task**: https://taskfile.dev/#/installation
 
 ## Install
 
@@ -12,7 +13,7 @@ $ go install
 
 ## How to run
 
-Install [Task](https://taskfile.dev/#/installation), then run:
+Using just start using task command:
 
 ```
 $ task
