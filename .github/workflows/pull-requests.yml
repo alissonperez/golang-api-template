@@ -58,7 +58,7 @@ jobs:
         run: go install
 
       - name: Install Task
-        run: go get -u github.com/go-task/task/v3/cmd/task
+        uses: arduino/setup-task@v1
 
       - name: Build
         run: task build
@@ -92,7 +92,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Install Task
-        run: go get -u github.com/go-task/task/v3/cmd/task
+        uses: arduino/setup-task@v1
 
       - name: Docker Build
         run: task docker-build
