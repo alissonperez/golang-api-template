@@ -5,7 +5,7 @@ FROM golang:1.19.0-alpine3.15 AS build-env
 
 ADD . /src
 
-RUN cd /src && go install && go build -o goapp
+RUN cd /src && go mod tidy && go build -o goapp
 
 # final stage
 FROM alpine
