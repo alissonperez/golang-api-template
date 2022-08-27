@@ -6,6 +6,7 @@ Go API template
 - Dependency injection using [Dig](https://github.com/uber-go/dig).
 - Hot reload using [air](https://github.com/cosmtrek/air).
 - Logging structure
+- Ready for auth with JWT
 
 ## Steps:
 
