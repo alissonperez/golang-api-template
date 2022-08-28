@@ -36,8 +36,8 @@ func init() {
 	config = nil
 }
 
-func setDefault(viper *viper.Viper) {
-	viper.SetDefault("server_port", 8000)
+func setDefault(viperObj *viper.Viper) {
+	viperObj.SetDefault("server_port", 8000)
 }
 
 func createConfig() *viperConfig {
@@ -74,7 +74,5 @@ func GetConfig() Config {
 }
 
 func Provide(container *dig.Container) {
-	container.Provide(func() Config {
-		return GetConfig()
-	})
+	container.Provide(GetConfig)
 }
