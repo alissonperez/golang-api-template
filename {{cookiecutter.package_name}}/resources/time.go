@@ -34,5 +34,5 @@ func (dt *DateTime8601) MarshalJSON() ([]byte, error) {
 		return []byte("null"), nil
 	}
 
-	return []byte(fmt.Sprintf("\"%s\"", dt.Time.Format(ISO8601Layout))), nil
+	return []byte(fmt.Sprintf("%q", dt.Time.Format(ISO8601Layout))), nil
 }

@@ -21,12 +21,12 @@ func (s ClientService) GetClientFromRequest(r *http.Request) (resources.Client, 
 
 	client, ok := s.repo.GetById(authData.ClientId)
 	if !ok {
-		return resources.Client{}, fmt.Errorf("Client not found")
+		return resources.Client{}, fmt.Errorf("client not found")
 	}
 
 	return client, nil
 }
 
-func NewService(repo repository.ClientRepository, auth auth.Auth) ClientService {
-	return ClientService{repo: repo, auth: auth}
+func NewService(repo repository.ClientRepository, authObj auth.Auth) ClientService {
+	return ClientService{repo: repo, auth: authObj}
 }

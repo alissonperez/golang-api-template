@@ -20,8 +20,8 @@ func handleRouterUrl(urlObj *url.URL, err error) string {
 }
 
 func (s UrlService) Hello(name string) string {
-	url, err := s.router.Get("Hello").URL("myName", name)
-	return handleRouterUrl(url, err)
+	localUrl, err := s.router.Get("Hello").URL("myName", name)
+	return handleRouterUrl(localUrl, err)
 }
 
 func NewService(router *mux.Router) UrlService {

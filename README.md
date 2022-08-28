@@ -7,6 +7,7 @@ Go API template
 - Hot reload using [air](https://github.com/cosmtrek/air).
 - Logging structure
 - Ready for auth with JWT
+- Lint with [Go-Critic](https://github.com/go-critic/go-critic).
 
 ## Steps:
 
