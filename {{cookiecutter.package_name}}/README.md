@@ -8,6 +8,7 @@
 ## Install
 
 ```
+$ go mod tidy
 $ go install
 ```
 
