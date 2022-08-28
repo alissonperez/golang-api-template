@@ -41,38 +41,37 @@ func (a authJwt) FromRequest(r *http.Request) (*Claims, error) {
 
 	if err != nil {
 		if ve, ok := err.(*jwt.ValidationError); ok {
-			if ve.Errors&jwt.ValidationErrorMalformed != 0 {
-				return nil, fmt.Errorf("Malformed token")
-			} else if ve.Errors&(jwt.ValidationErrorExpired|jwt.ValidationErrorNotValidYet) != 0 {
-				return nil, fmt.Errorf("Expired token")
-			} else {
-				return nil, fmt.Errorf("Unexpected token")
+			switch {
+			case ve.Errors&jwt.ValidationErrorMalformed != 0:
+				return nil, fmt.Errorf("malformed token")
+			case ve.Errors&(jwt.ValidationErrorExpired|jwt.ValidationErrorNotValidYet) != 0:
+				return nil, fmt.Errorf("malformed token")
+			default:
+				return nil, fmt.Errorf("unexpected token")
 			}
 		}
 	}
 
-	return nil, fmt.Errorf("Unexpected token")
+	return nil, fmt.Errorf("unexpected token")
 }
 
 func getAuthToken(authHeader string) (string, error) {
 	if len(authHeader) < 8 {
-		return "", fmt.Errorf("Invalid Authorization header")
+		return "", fmt.Errorf("invalid Authorization header")
 	}
 
 	beginning := strings.ToLower(strings.Trim(authHeader[0:6], " "))
 	if beginning != "bearer" {
-		return "", fmt.Errorf("Authorization header must begging with 'Bearer'")
+		return "", fmt.Errorf("authorization header must begging with 'Bearer'")
 	}
 
 	return strings.Trim(authHeader[7:], " "), nil
 }
 
-func CreateAuth(config config.Config) Auth {
-	return &authJwt{config: config}
+func CreateAuth(configObj config.Config) Auth {
+	return &authJwt{config: configObj}
 }
 
 func Provide(container *dig.Container) {
-	container.Provide(func(config config.Config) Auth {
-		return CreateAuth(config)
-	})
+	container.Provide(CreateAuth)
 }

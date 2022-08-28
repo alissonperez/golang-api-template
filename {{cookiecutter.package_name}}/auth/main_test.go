@@ -20,13 +20,13 @@ func init() {
 	expiredToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6NDIsImV4cCI6MTYxMjI3OTk0M30.YcaODJ19jO2jfaR12j8zN7JBWBG8pTcTeKKN3Br4Qq8"
 }
 
-func createAuth(t *testing.T, jwtkey string, token string) (*http.Request, Auth) {
-	config := config.CreateConfigFromMap(map[string]interface{}{
+func createAuth(t *testing.T, jwtkey, token string) (*http.Request, Auth) {
+	localConfig := config.CreateConfigFromMap(map[string]interface{}{
 		"jwt_key": jwtkey,
 	})
-	auth := CreateAuth(config)
+	auth := CreateAuth(localConfig)
 
-	request, err := http.NewRequest("POST", "http://my-api.com/foo/bar", nil)
+	request, err := http.NewRequest("POST", "http://my-api.com/foo/bar", http.NoBody)
 	testutils.Ok(t, err)
 
 	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
