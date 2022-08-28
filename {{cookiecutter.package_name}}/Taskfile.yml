@@ -5,6 +5,16 @@ tasks:
     cmds:
       - air -c .air.toml
 
+  setup:
+    cmds:
+      - go mod tidy
+      - go install -v github.com/go-critic/go-critic/cmd/gocritic@latest
+      - go install
+
+  lint:
+    cmds:
+      - gocritic check -enableAll ./...
+
   test:
     cmds:
       - go test ./...

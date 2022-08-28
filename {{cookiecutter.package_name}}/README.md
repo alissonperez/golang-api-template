@@ -3,13 +3,16 @@
 ## Dependencies
 
 - **Go 1.19**: See how to setup and basic usage it [here](https://go.dev/doc/install).
-- **Task**: Usually, just `go install github.com/go-task/task/v3/cmd/task@latest`, other options [here](https://taskfile.dev/#/installation).
+- **Task**: More about [here](https://taskfile.dev/).
 
-## Install
+## Setup / Install
+
+First, just install [**Task**](https://taskfile.dev/). Usually, just `go install github.com/go-task/task/v3/cmd/task@latest`, other options [here](https://taskfile.dev/#/installation)
+
+Then, just run `setup` task to tidy and install dependencies:
 
 ```
-$ go mod tidy
-$ go install
+$ task setup
 ```
 
 ## How to run
