@@ -19,17 +19,20 @@ jobs:
         with:
           go-version: ${{ '{{' }} matrix.go-version {{ '}}' }}
 
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install
-        run: go install
-
-      - name: Install Task
-        uses: arduino/setup-task@v1
+        run: task setup
 
       - name: Test
         run: task test
+
+      - name: Test
+        run: task lint
 
       - name: Build
         run: task build
