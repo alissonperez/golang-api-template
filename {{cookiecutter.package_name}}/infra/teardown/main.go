@@ -36,7 +36,5 @@ func newTearDown() *TearDown {
 }
 
 func Provide(container *dig.Container) {
-	container.Provide(func() *TearDown {
-		return newTearDown()
-	})
+	container.Provide(newTearDown)
 }

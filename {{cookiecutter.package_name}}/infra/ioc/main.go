@@ -14,9 +14,7 @@ import (
 func CreateContainer() *dig.Container {
 	c := dig.New()
 
-	c.Provide(func() *mux.Router {
-		return mux.NewRouter()
-	})
+	c.Provide(mux.NewRouter)
 
 	teardown.Provide(c)
 	config.Provide(c)
