@@ -55,7 +55,7 @@ func TestFromRequestWithEmptyTokenReturnUnexpectedTokenError(t *testing.T) {
 	)
 
 	result, err := auth.FromRequest(request)
-	testutils.Equals(t, fmt.Errorf("Invalid Authorization header"), err)
+	testutils.Equals(t, fmt.Errorf("invalid Authorization header"), err)
 	testutils.Equals(t, (*Claims)(nil), result)
 }
 
@@ -67,7 +67,7 @@ func TestFromRequestWithInvalidTokenReturnMalformedTokenError(t *testing.T) {
 	)
 
 	result, err := auth.FromRequest(request)
-	testutils.Equals(t, fmt.Errorf("Malformed token"), err)
+	testutils.Equals(t, fmt.Errorf("malformed token"), err)
 	testutils.Equals(t, (*Claims)(nil), result)
 }
 
@@ -79,7 +79,7 @@ func TestFromRequestWithInvalidSignatureReturnMalformedTokenError(t *testing.T) 
 	)
 
 	result, err := auth.FromRequest(request)
-	testutils.Equals(t, fmt.Errorf("Unexpected token"), err)
+	testutils.Equals(t, fmt.Errorf("unexpected token"), err)
 	testutils.Equals(t, (*Claims)(nil), result)
 }
 
@@ -91,7 +91,7 @@ func TestFromRequestWithExpiredTokenReturnExpiredTokenError(t *testing.T) {
 	)
 
 	result, err := auth.FromRequest(request)
-	testutils.Equals(t, fmt.Errorf("Expired token"), err)
+	testutils.Equals(t, fmt.Errorf("expired token"), err)
 	testutils.Equals(t, (*Claims)(nil), result)
 }
 
@@ -105,7 +105,7 @@ func TestFromRequestWithNoAuthorizationReturnExpectedError(t *testing.T) {
 	request.Header.Del("Authorization")
 
 	result, err := auth.FromRequest(request)
-	testutils.Equals(t, fmt.Errorf("Invalid Authorization header"), err)
+	testutils.Equals(t, fmt.Errorf("invalid Authorization header"), err)
 	testutils.Equals(t, (*Claims)(nil), result)
 }
 
@@ -119,7 +119,7 @@ func TestFromRequestWithEmptyBearerReturnExpectedError(t *testing.T) {
 	request.Header.Set("Authorization", "Bearer")
 
 	result, err := auth.FromRequest(request)
-	testutils.Equals(t, fmt.Errorf("Invalid Authorization header"), err)
+	testutils.Equals(t, fmt.Errorf("invalid Authorization header"), err)
 	testutils.Equals(t, (*Claims)(nil), result)
 }
 
@@ -133,6 +133,6 @@ func TestFromRequestWithInvalidAuthorizationHeaderReturnExpectedError(t *testing
 	request.Header.Set("Authorization", "foooobaaarr")
 
 	result, err := auth.FromRequest(request)
-	testutils.Equals(t, fmt.Errorf("Authorization header must begging with 'Bearer'"), err)
+	testutils.Equals(t, fmt.Errorf("authorization header must begging with 'Bearer'"), err)
 	testutils.Equals(t, (*Claims)(nil), result)
 }

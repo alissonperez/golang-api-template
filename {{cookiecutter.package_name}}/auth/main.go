@@ -45,7 +45,7 @@ func (a authJwt) FromRequest(r *http.Request) (*Claims, error) {
 			case ve.Errors&jwt.ValidationErrorMalformed != 0:
 				return nil, fmt.Errorf("malformed token")
 			case ve.Errors&(jwt.ValidationErrorExpired|jwt.ValidationErrorNotValidYet) != 0:
-				return nil, fmt.Errorf("malformed token")
+				return nil, fmt.Errorf("expired token")
 			default:
 				return nil, fmt.Errorf("unexpected token")
 			}
