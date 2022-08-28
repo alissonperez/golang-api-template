@@ -10,11 +10,6 @@ import (
 )
 
 func Provide(container *dig.Container) {
-	container.Provide(func(repo repository.ClientRepository, auth auth.Auth) client.ClientService {
-		return client.NewService(repo, auth)
-	})
-
-	container.Provide(func(router *mux.Router) url.UrlService {
-		return url.NewService(router)
-	})
+	container.Provide(client.NewService)
+	container.Provide(url.NewService)
 }
